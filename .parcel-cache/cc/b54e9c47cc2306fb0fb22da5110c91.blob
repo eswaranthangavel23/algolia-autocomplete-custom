@@ -1,0 +1,303 @@
+var _algoliaAutocompleteJs = require('@algolia/autocomplete-js');
+var _algoliasearchLite = require('algoliasearch/lite');
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+var _algoliasearchLiteDefault = _parcelHelpers.interopDefault(_algoliasearchLite);
+var _preact = require('preact');
+require('@algolia/autocomplete-theme-classic');
+var _jsxFileName = "C:\\work\\changecx\\saterday\\algolia-autocomplete-custom\\app.tsx";
+const searchClient = _algoliasearchLiteDefault.default('RA46FT2Q5G', '69a1fff0143c7121bc2f35825680b272');
+_algoliaAutocompleteJs.autocomplete({
+  container: '#autocomplete',
+  detachedMediaQuery: '',
+  defaultActiveItemId: 0,
+  debug: true,
+  getSources() {
+    return [{
+      sourceId: 'hits',
+      getItems({query}) {
+        return _algoliaAutocompleteJs.getAlgoliaResults({
+          searchClient,
+          queries: [{
+            indexName: 'CTL_hermanmiller_ct_demo_products_data',
+            query,
+            params: {
+              hitsPerPage: 8
+            }
+          }]
+        });
+      },
+      getItemUrl({item}) {
+        return item.url;
+      },
+      onActive({item, setContext}) {
+        setContext({
+          preview: item
+        });
+      },
+      templates: {
+        item({item, components}) {
+          const data = {
+            name: item.name['en'],
+            image: item.images[0].url
+          };
+          return _preact.h("a", {
+            className: "aa-ItemLink",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 45,
+              columnNumber: 15
+            }
+          }, "eswaran", _preact.h("div", {
+            className: "aa-ItemContent",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 47,
+              columnNumber: 17
+            }
+          }, _preact.h("div", {
+            className: "aa-ItemIcon",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 48,
+              columnNumber: 19
+            }
+          }, _preact.h("img", {
+            src: data.image,
+            alt: data.name,
+            width: "40",
+            height: "40",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 49,
+              columnNumber: 21
+            }
+          })), _preact.h("div", {
+            className: "aa-ItemContentBody",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 56,
+              columnNumber: 19
+            }
+          }, _preact.h("div", {
+            className: "aa-ItemContentTitle",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 57,
+              columnNumber: 21
+            }
+          }, _preact.h(components.Highlight, {
+            hit: data,
+            attribute: "name",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 58,
+              columnNumber: 21
+            }
+          })))));
+        }
+      }
+    }, {
+      sourceId: 'suggestions',
+      getItems({query}) {
+        return _algoliaAutocompleteJs.getAlgoliaResults({
+          searchClient,
+          queries: [{
+            indexName: 'CTL_hermanmiller_ct_demo_products_data_query_suggestions',
+            query,
+            params: {
+              hitsPerPage: 4
+            }
+          }]
+        });
+      },
+      onSelect({item, setQuery, setIsOpen, refresh}) {
+        setQuery(`${item.query} `);
+        setIsOpen(true);
+        refresh();
+      },
+      templates: {
+        header({Fragment}) {
+          return _preact.h(Fragment, {
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 91,
+              columnNumber: 15
+            }
+          }, _preact.h("span", {
+            className: "aa-SourceHeaderTitle",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 92,
+              columnNumber: 17
+            }
+          }, "Can't find what you're looking for?"), _preact.h("div", {
+            className: "aa-SourceHeaderLine",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 95,
+              columnNumber: 17
+            }
+          }));
+        },
+        item({item, components}) {
+          return _preact.h("div", {
+            className: "aa-QuerySuggestion",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 101,
+              columnNumber: 15
+            }
+          }, _preact.h(components.Highlight, {
+            hit: item,
+            attribute: "query",
+            __self: this,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 102,
+              columnNumber: 17
+            }
+          }));
+        }
+      }
+    }];
+  },
+  render({children, state, Fragment, components}, root) {
+    const {preview} = state.context;
+    const suggestion = state.collections[1].items.slice(0, 5);
+    const results = state.collections[0].items.map(x => {
+      return {
+        query: x.name.en,
+        description: x.description.de
+      };
+    }).slice(0, 5);
+    _preact.render(_preact.h(Fragment, {
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 116,
+        columnNumber: 7
+      }
+    }, _preact.h("div", {
+      className: "aa-Grid",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 117,
+        columnNumber: 9
+      }
+    }, _preact.h("div", {
+      className: "aa-Results aa-Column",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 118,
+        columnNumber: 11
+      }
+    }, _preact.h("div", {
+      className: "leftContainer",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 119,
+        columnNumber: 13
+      }
+    }, suggestion.map(item => _preact.h("a", {
+      href: "#",
+      className: "leftContaineritem",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 120,
+        columnNumber: 38
+      }
+    }, _preact.h("div", {
+      className: "text",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 122,
+        columnNumber: 15
+      }
+    }, _preact.h(components.Highlight, {
+      hit: item,
+      attribute: "query",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 123,
+        columnNumber: 13
+      }
+    })))))), _preact.h("div", {
+      className: "aa-Preview aa-Column",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 126,
+        columnNumber: 11
+      }
+    }, _preact.h("div", {
+      class: "rightContainer",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 127,
+        columnNumber: 13
+      }
+    }, results.map(item => _preact.h("div", {
+      className: "rightContainerItem",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 129,
+        columnNumber: 13
+      }
+    }, "   ", _preact.h("div", {
+      class: "txtname",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 129,
+        columnNumber: 52
+      }
+    }, _preact.h(components.Highlight, {
+      hit: item,
+      tagName: "query",
+      attribute: "query",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 130,
+        columnNumber: 13
+      }
+    })), _preact.h("div", {
+      class: "txtdescription",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 131,
+        columnNumber: 13
+      }
+    }, "  ", _preact.h(components.Highlight, {
+      hit: item,
+      tagName: "description",
+      attribute: "description",
+      __self: this,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 131,
+        columnNumber: 43
+      }
+    }), " "))))))), root);
+  }
+});

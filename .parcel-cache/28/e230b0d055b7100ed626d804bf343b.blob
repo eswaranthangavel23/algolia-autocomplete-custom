@@ -1,0 +1,18 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.HASH_REF_8a6e625a6f078c797be837fbf556d9ac.css">
+
+    <title>Algolia</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="autocomplete"></div>
+    </div>
+
+    <script src="/index.HASH_REF_73d3feffd3cbf9da4eccd814e8622ece.js"></script>
+    <script src="/index.HASH_REF_b5ec41889fd9c8ba20f8d3037d93137f.js"></script>
+  </body>
+</html>
